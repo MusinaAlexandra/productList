@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TODO</title>
+    <link href="/css/main-list.css" th:href="@{/css/main-list.css}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/script/script.js" th:href="@{/script/script.js}"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <ul>
+        <h1>Список покупок</h1>
+        <div class="item" th:id="${item.id} + -item" th:each="item : ${items}">
+            <p class="item__description" th:text="${item.name}">Text</p>
+            <div class="item__check">
+                <button class="item__check-btn"  th:attr="data-post-id=${item.id}">Отметить</button>
+                <div class="item__check-item" th:id="${item.id} + -status-button" th:text="${item.status} ? '+' : '-'">Text</div>
+            </div>
+            <button class="item__delete-btn" th:id="${item.id} + -delete-button" th:attr="data-post-id=${item.id}">
+                Удалить
+            </button>
+        </div>
+        <form class="add-new-item-form" action="/item/add" method="post">
+            <div class="add-item">
+                <input name="description" type="text" class="add-item__description">
+            </div>
+            <input type="submit" id="item_submit" value="добавить">
+        </form>
+        <div id="item_add">
+            <p>+</p>
+        </div>
+    </ul>
+</body>
+</html>
